@@ -38,6 +38,7 @@ from flask import request
 from flask.ext.jwt import JWT
 from datetime import timedelta, datetime
 import humanize
+from flask_assets import Environment, Bundle
 
 import sqlalchemy as sa
 
@@ -143,6 +144,9 @@ def create_app():
         app.register_blueprint(api_v1)
 
     sa.orm.configure_mappers()
+
+    assets = Environment()
+    assets.init_app(app)
 
     return app, _manager, db, _jwt
 
